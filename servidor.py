@@ -1,10 +1,7 @@
 import socket
 import threading
 
-
-# ======================================================
-# BLOCO 1 - Configuração geral
-# ======================================================
+#Configuração geral
 IP = "0.0.0.0"
 PORTA = 5000
 
@@ -20,9 +17,7 @@ nomes_udp = {}
 modo = None  # guarda se está rodando em "TCP" ou "UDP"
 
 
-# ======================================================
-# BLOCO 2 - Transmitir mensagem para todos (funciona nos 2 modos)
-# ======================================================
+#Transmitir mensagem para todos (funciona nos 2 modos)
 def transmitir(mensagem, remetente=None):
     if modo == "TCP":
         for cliente in clientes_tcp:
@@ -37,9 +32,8 @@ def transmitir(mensagem, remetente=None):
                 socket_udp.sendto(mensagem.encode("utf-8"), endereco)
 
 
-# ======================================================
+
 # BLOCO 3 - Servidor digitar mensagens (funciona nos 2 modos)
-# ======================================================
 def enviar_mensagens_servidor():
     while True:
         mensagem = input()
@@ -49,9 +43,8 @@ def enviar_mensagens_servidor():
         transmitir(f"[Servidor]: {mensagem}")
 
 
-# ======================================================
 # BLOCO 4 - Modo TCP: cuidar de cada cliente conectado
-# ======================================================
+
 def lidar_cliente_tcp(conexao):
     try:
         nome = conexao.recv(1024).decode("utf-8")
@@ -78,9 +71,7 @@ def lidar_cliente_tcp(conexao):
         conexao.close()
 
 
-# ======================================================
 # BLOCO 5 - Modo TCP: iniciar servidor e aceitar conexões
-# ======================================================
 def iniciar_servidor_tcp():
     servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     servidor.bind((IP, PORTA))
@@ -99,9 +90,7 @@ def iniciar_servidor_tcp():
         thread.start()
 
 
-# ======================================================
 # BLOCO 6 - Modo UDP: escutar mensagens (não tem "conexão" fixa)
-# ======================================================
 def iniciar_servidor_udp():
     global socket_udp
     socket_udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -129,9 +118,7 @@ def iniciar_servidor_udp():
             transmitir(f"{nome}: {mensagem}", remetente=endereco)
 
 
-# ======================================================
 # BLOCO 7 - Escolher o protocolo e iniciar
-# ======================================================
 def iniciar_servidor():
     global modo
     protocolo = input("Escolha o protocolo (TCP ou UDP): ").strip().upper()
