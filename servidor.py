@@ -33,7 +33,7 @@ def transmitir(mensagem, remetente=None):
 
 
 
-# BLOCO 3 - Servidor digitar mensagens (funciona nos 2 modos)
+#Servidor digitar mensagens (funciona nos 2 modos)
 def enviar_mensagens_servidor():
     while True:
         mensagem = input()
@@ -43,7 +43,7 @@ def enviar_mensagens_servidor():
         transmitir(f"[Servidor]: {mensagem}")
 
 
-# BLOCO 4 - Modo TCP: cuidar de cada cliente conectado
+#Modo TCP: cuidar de cada cliente conectado
 
 def lidar_cliente_tcp(conexao):
     try:
@@ -71,7 +71,7 @@ def lidar_cliente_tcp(conexao):
         conexao.close()
 
 
-# BLOCO 5 - Modo TCP: iniciar servidor e aceitar conexões
+#Modo TCP: iniciar servidor e aceitar conexões
 def iniciar_servidor_tcp():
     servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     servidor.bind((IP, PORTA))
@@ -90,7 +90,7 @@ def iniciar_servidor_tcp():
         thread.start()
 
 
-# BLOCO 6 - Modo UDP: escutar mensagens (não tem "conexão" fixa)
+#Modo UDP: escutar mensagens (não tem "conexão" fixa)
 def iniciar_servidor_udp():
     global socket_udp
     socket_udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -118,7 +118,7 @@ def iniciar_servidor_udp():
             transmitir(f"{nome}: {mensagem}", remetente=endereco)
 
 
-# BLOCO 7 - Escolher o protocolo e iniciar
+#Escolher o protocolo e iniciar
 def iniciar_servidor():
     global modo
     protocolo = input("Escolha o protocolo (TCP ou UDP): ").strip().upper()
