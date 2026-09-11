@@ -44,7 +44,7 @@ def receber_mensagens_tcp(cliente):
             break
 
 
-# BLOCO 2 - Modo UDP: registrar nome e trocar mensagens
+#Modo UDP: registrar nome e trocar mensagens
 def cliente_udp(ip_servidor, porta_servidor, nome):
     cliente = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     endereco_servidor = (ip_servidor, porta_servidor)
@@ -76,7 +76,7 @@ def receber_mensagens_udp(cliente):
             break
 
 
-# BLOCO 3 - Escolher protocolo e dados de conexão
+#Escolher protocolo e dados de conexão
 def iniciar_cliente():
     protocolo = input("Escolha o protocolo (TCP ou UDP): ").strip().upper()
     ip_servidor = input("Digite o IP do servidor: ").strip()
